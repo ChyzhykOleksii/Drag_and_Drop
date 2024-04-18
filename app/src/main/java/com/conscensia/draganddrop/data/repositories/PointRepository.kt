@@ -17,9 +17,8 @@ class PointRepository(
         sharedPreferencesDataSource.saveData(POINT_KEY, gson.toJson(point))
     }
 
-    override fun getPoint(): Point {
+    override fun getPoint(): Point? {
         return gson.fromJson(sharedPreferencesDataSource.getData(POINT_KEY), Point::class.java)
-            ?: Point(0, 0)
     }
 
     override fun removePoint() {

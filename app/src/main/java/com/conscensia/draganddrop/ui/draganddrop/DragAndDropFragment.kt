@@ -48,8 +48,10 @@ class DragAndDropFragment : Fragment() {
         viewModel.pointLiveData.observe(viewLifecycleOwner) { point ->
             binding.imageView.layoutParams = binding.imageView.layoutParams?.let { layoutParams ->
                 (layoutParams as ViewGroup.MarginLayoutParams).apply {
-                    leftMargin = point.x - layoutParams.width / 2
-                    topMargin = point.y - layoutParams.height / 2
+                    val widthCorrection = layoutParams.width / 2
+                    val heightCorrection = layoutParams.height / 2
+                    leftMargin = (point?.x ?: widthCorrection) - widthCorrection
+                    topMargin = (point?.y ?: heightCorrection) - heightCorrection
                 }
             }
         }
@@ -95,7 +97,6 @@ class DragAndDropFragment : Fragment() {
                     viewModel.onDropped(Point(event.x.toInt(), event.y.toInt()))
                     true
                 }
-
                 else -> false
             }
         }

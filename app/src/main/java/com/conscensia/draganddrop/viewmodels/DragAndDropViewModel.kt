@@ -9,7 +9,7 @@ import com.conscensia.draganddrop.data.repositories.IPointRepository
 class DragAndDropViewModel(private val pointRepo: IPointRepository): ViewModel() {
 
     private val _pointLiveData = MutableLiveData<Point>()
-    val pointLiveData: LiveData<Point> = _pointLiveData
+    val pointLiveData: LiveData<Point?> = _pointLiveData
 
     init {
         _pointLiveData.value = pointRepo.getPoint()
